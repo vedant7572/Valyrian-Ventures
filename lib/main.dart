@@ -4,7 +4,6 @@ import 'package:valyrian_ventures/pages/profile.dart';
 import 'package:valyrian_ventures/pages/signup.dart';
 // import 'package:valyrian_ventures/pages/signup.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -17,11 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home:Signup(),
+      debugShowCheckedModeBanner: false,
+      home: Signup(),
       //aaaa aai zavadyaaa
       //vedant puchicha
       //vinya yed bhokachyaa
+      //Who let the dogs out
     );
   }
 }
