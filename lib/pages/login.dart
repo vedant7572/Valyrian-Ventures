@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:valyrian_ventures/pages/signup.dart';
@@ -16,56 +18,41 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   String email = "", password = "";
 
-  final _formkey= GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
 
   TextEditingController userEmailController = TextEditingController();
   TextEditingController userPasswordController = TextEditingController();
 
   userLogin() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password
-      );
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
 
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              backgroundColor: Colors.green,
-              content: Text(
-                "Login Successful",
-                style: TextStyle(fontSize: 20.0),
-              )
-          )
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.green,
+          content: Text(
+            "Login Successful",
+            style: TextStyle(fontSize: 20.0),
+          )));
 
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const BottomNavbar()
-          )
-      );
-    }
-    on FirebaseAuthException catch (e) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const BottomNavbar()));
+    } on FirebaseAuthException catch (e) {
       String message;
       if (e.code == 'user-not-found') {
         message = "No User Found for that Email";
-      }
-      else if (e.code == 'wrong-password') {
+      } else if (e.code == 'wrong-password') {
         message = "Wrong Password Provided by User";
-      }
-      else {
+      } else {
         message = "An error occurred. Please try again.";
       }
 
-
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              backgroundColor: Colors.red,
-              content: Text(
-                message,
-                style: TextStyle(fontSize: 18.0, color: Colors.black),
-              )
-          )
-      );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            message,
+            style: TextStyle(fontSize: 18.0, color: Colors.black),
+          )));
     }
   }
 
@@ -98,10 +85,11 @@ class _LogInState extends State<LogIn> {
                       ],
                     ),
                   ),
-                ),//red part
+                ), //red part
                 Container(
-                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 3),
-                  height: MediaQuery.of(context).size.height /1.6,
+                  margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height / 3),
+                  height: MediaQuery.of(context).size.height / 1.6,
                   width: MediaQuery.of(context).size.width,
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -110,7 +98,7 @@ class _LogInState extends State<LogIn> {
                       topRight: Radius.circular(40),
                     ),
                   ),
-                ),//white part
+                ), //white part
                 Container(
                   margin: EdgeInsets.only(top: 60.0, left: 20.0, right: 20.0),
                   child: Column(
@@ -131,7 +119,7 @@ class _LogInState extends State<LogIn> {
                         child: Container(
                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
                           width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height /2,
+                          height: MediaQuery.of(context).size.height / 2,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20),
@@ -153,15 +141,16 @@ class _LogInState extends State<LogIn> {
 
                                 TextFormField(
                                   controller: userEmailController,
-                                  validator: (value){
-                                    if(value==null|| value.isEmpty){
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
                                       return 'Please Enter Email';
                                     }
                                     return null;
                                   },
                                   decoration: const InputDecoration(
                                     border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12.0)),
                                     ),
                                     labelText: 'Email',
                                     prefixIcon: Icon(Icons.email_outlined),
@@ -173,8 +162,8 @@ class _LogInState extends State<LogIn> {
 
                                 TextFormField(
                                   controller: userPasswordController,
-                                  validator: (value){
-                                    if(value==null|| value.isEmpty){
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
                                       return 'Please Enter Email';
                                     }
                                     return null;
@@ -182,13 +171,16 @@ class _LogInState extends State<LogIn> {
                                   obscureText: _obscureText,
                                   decoration: InputDecoration(
                                     border: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12.0)),
                                     ),
                                     labelText: 'Password',
                                     prefixIcon: Icon(Icons.lock),
                                     suffixIcon: IconButton(
                                       icon: Icon(
-                                        _obscureText ? Icons.visibility : Icons.visibility_off,
+                                        _obscureText
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
                                         color: Colors.grey,
                                       ),
                                       onPressed: _togglePasswordVisibility,
@@ -200,11 +192,12 @@ class _LogInState extends State<LogIn> {
                                   height: 15.0,
                                 ),
                                 GestureDetector(
-                                  onTap: (){
+                                  onTap: () {
                                     Navigator.push(
-                                        context, 
-                                        MaterialPageRoute(builder: (context)=>ForgotPassword())
-                                    );
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ForgotPassword()));
                                   },
                                   child: Container(
                                     alignment: Alignment.topRight,
@@ -213,17 +206,17 @@ class _LogInState extends State<LogIn> {
                                       style: AppWidget.lightTextFieldStyle(),
                                     ),
                                   ),
-                                ),//forgot password
+                                ), //forgot password
                                 const SizedBox(
                                   height: 40.0,
                                 ),
 
                                 GestureDetector(
-                                  onTap: (){
-                                    if(_formkey.currentState!.validate()){
+                                  onTap: () {
+                                    if (_formkey.currentState!.validate()) {
                                       setState(() {
-                                        email= userEmailController.text;
-                                        password= userPasswordController.text;
+                                        email = userEmailController.text;
+                                        password = userPasswordController.text;
                                       });
                                     }
                                     userLogin();
@@ -232,24 +225,25 @@ class _LogInState extends State<LogIn> {
                                     elevation: 5.0,
                                     borderRadius: BorderRadius.circular(20),
                                     child: Container(
-                                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 8.0),
                                       width: 200,
                                       decoration: BoxDecoration(
                                           color: Color(0xFFE80606),
-                                          borderRadius: BorderRadius.circular(20)),
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
                                       child: const Center(
                                           child: Text(
-                                            "LOGIN",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18.0,
-                                                fontFamily: 'Poppins1',
-                                                fontWeight: FontWeight.bold),
-                                          )
-                                      ),
+                                        "LOGIN",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18.0,
+                                            fontFamily: 'Poppins1',
+                                            fontWeight: FontWeight.bold),
+                                      )),
                                     ),
                                   ),
-                                ),//login button
+                                ), //login button
                               ],
                             ),
                           ),
@@ -262,15 +256,13 @@ class _LogInState extends State<LogIn> {
                           onTap: () {
                             Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (context) => const Signup()
-                                )
-                            );
+                                MaterialPageRoute(
+                                    builder: (context) => const Signup()));
                           },
-                          child:  Text(
+                          child: Text(
                             "Don't have an account? Sign up",
                             style: AppWidget.semiBoldTextFieldStyle(),
-                          )
-                      )//sign up gesture detector
+                          )) //sign up gesture detector
                     ],
                   ),
                 )
