@@ -4,6 +4,7 @@ import 'package:valyrian_ventures/admin/admin_login.dart';
 import 'package:valyrian_ventures/pages/login.dart';
 import 'package:valyrian_ventures/pages/profile.dart';
 import 'package:valyrian_ventures/pages/signup.dart';
+import 'package:valyrian_ventures/pages/wallet.dart';
 // import 'package:valyrian_ventures/pages/signup.dart';
 
 void main() async {

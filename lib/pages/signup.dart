@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:random_string/random_string.dart';
+import '../service/database.dart';
+import '../service/shared_pref.dart';
 import '../widget/widget_support.dart';
 import 'bottom_navbar.dart';
 import 'login.dart';
@@ -37,6 +40,21 @@ class _SignupState extends State<Signup> {
               )
           )
         );
+        String Id = randomAlphaNumeric(10);
+
+        Map<String, dynamic> addUserInfo = {
+          "Name":nameController.text,
+          "Email": mailController.text,
+          "Wallet": "0",
+          "Id": Id,
+        };
+        await DatabaseMethods().addUserDetails(addUserInfo, Id);
+        await SharedPreferenceHelper().saveUserName(nameController.text);
+        await SharedPreferenceHelper().saveUserEmail(mailController.text);
+        await SharedPreferenceHelper().saveUserWallet('0');
+        //because initially when the account is created the balance in wallet should be zero
+        await SharedPreferenceHelper().saveUserId(Id);
+        //user id is the random id generated above
 
         Navigator.pushReplacement(
             context,
@@ -75,6 +93,8 @@ class _SignupState extends State<Signup> {
       _obscureText = !_obscureText;
     });
   } // for password visibility
+
+
 
   @override
   Widget build(BuildContext context) {
