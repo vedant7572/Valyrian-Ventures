@@ -9,25 +9,7 @@ class DatabaseMethods {
         .set(userInfoMap);
   }
 
-<<<<<<< HEAD
   Future addItem(Map<String, dynamic> userInfoMap, String name) async {
     return await FirebaseFirestore.instance.collection(name).add(userInfoMap);
   }
 }
-=======
-  updataUserWallet(String Id,String amount) async{
-    return await FirebaseFirestore.instance
-        .collection("users")
-        .doc(Id)
-        .update({"Wallet": amount});
-  }
-
-  // Future<String> getUserWallet(String userId) async {
-  //   DocumentSnapshot userDoc = await FirebaseFirestore.instance
-  //       .collection("users")
-  //       .doc(userId)
-  //       .get();
-  //   return userDoc['wallet'].toString();
-  // }
-}
->>>>>>> wallet2.1
