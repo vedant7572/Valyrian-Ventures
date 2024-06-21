@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:valyrian_ventures/service/database.dart';
 
 import '../service/shared_pref.dart';
 import '../widget/widget_support.dart';
@@ -32,7 +33,13 @@ class _WalletState extends State<Wallet> {
     super.initState();
   }
 
-
+  Future<void> makePayment(int amount) async{
+    add=int.parse(wallet!)+amount;
+    id= await SharedPreferenceHelper().getUserId();
+    await SharedPreferenceHelper().saveUserWallet(add.toString());
+    await DatabaseMethods().updataUserWallet(id!, add.toString());
+    await getthesharedpref();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +94,7 @@ class _WalletState extends State<Wallet> {
                       ),
 
                       Text(
-                        "\$wallet",
+                        "\$ " +wallet!,
                         style: AppWidget.boldTextFieldStyle(),
                       )//money remained in the wallet
                     ],
@@ -119,7 +126,7 @@ class _WalletState extends State<Wallet> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    // makePayment('100');
+                    makePayment(100);
                   },
                   child: Container(
                     padding: EdgeInsets.all(5),
@@ -134,7 +141,8 @@ class _WalletState extends State<Wallet> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // makePayment('500');
+                    makePayment(500);
+
                   },
                   child: Container(
                     padding: EdgeInsets.all(5),
@@ -149,7 +157,7 @@ class _WalletState extends State<Wallet> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // makePayment('1000');
+                    makePayment(1000);
                   },
                   child: Container(
                     padding: EdgeInsets.all(5),
@@ -164,7 +172,7 @@ class _WalletState extends State<Wallet> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // makePayment('2000');
+                    makePayment(2000);
                   },
                   child: Container(
                     padding: EdgeInsets.all(5),

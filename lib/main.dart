@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:valyrian_ventures/pages/bottom_navbar.dart';
 import 'package:valyrian_ventures/pages/login.dart';
 import 'package:valyrian_ventures/pages/profile.dart';
 import 'package:valyrian_ventures/pages/signup.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:LogIn(),
+        home:Signup(),
     );
   }
 }

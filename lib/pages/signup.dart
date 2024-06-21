@@ -48,19 +48,20 @@ class _SignupState extends State<Signup> {
           "Wallet": "0",
           "Id": Id,
         };
-        await DatabaseMethods().addUserDetails(addUserInfo, Id);
-        await SharedPreferenceHelper().saveUserName(nameController.text);
-        await SharedPreferenceHelper().saveUserEmail(mailController.text);
-        await SharedPreferenceHelper().saveUserWallet('0');
-        //because initially when the account is created the balance in wallet should be zero
-        await SharedPreferenceHelper().saveUserId(Id);
-        //user id is the random id generated above
+
 
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const BottomNavbar()
             )
         );
+        await DatabaseMethods().addUserDetails(addUserInfo, Id);
+        await SharedPreferenceHelper().saveUserName(nameController.text);
+        await SharedPreferenceHelper().saveUserEmail(mailController.text);
+        await SharedPreferenceHelper().saveUserWallet('0');
+        //because initially when the account is created the balance in wallet should be zero
+        await SharedPreferenceHelper().saveUserId(Id);
+        // user id is the random id generated above
 
       }
       on FirebaseException catch (e) {
