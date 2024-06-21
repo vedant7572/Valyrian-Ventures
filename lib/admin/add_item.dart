@@ -2,12 +2,8 @@
 
 import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:random_string/random_string.dart';
-import 'package:valyrian_ventures/admin/home_admin.dart';
-import 'package:valyrian_ventures/service/database.dart';
 import 'package:valyrian_ventures/widget/widget_support.dart';
 
 class AddItem extends StatefulWidget {
@@ -30,38 +26,6 @@ class _AddItemState extends State<AddItem> {
 
     selectedImage = File(image!.path);
     setState(() {});
-  }
-
-  uploadItem() async {
-    if (selectedImage != null &&
-        namecontroller.text != "" &&
-        pricecontroller.text != "" &&
-        detailcontroller.text != "") {
-      String addId = randomAlphaNumeric(10);
-
-      Reference firebaseStorageRef =
-          FirebaseStorage.instance.ref().child("blogImages").child(addId);
-      final UploadTask task = firebaseStorageRef.putFile(selectedImage!);
-
-      var downloadUrl = await (await task).ref.getDownloadURL();
-
-      Map<String, dynamic> addItem = {
-        "Image": downloadUrl,
-        "Name": namecontroller.text,
-        "Price": pricecontroller.text,
-        "Detail": detailcontroller.text
-      };
-      await DatabaseMethods().addItem(addItem, value!).then((value) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.orangeAccent,
-            content: Text(
-              "Item has been added Successfully",
-              style: TextStyle(fontSize: 18.0),
-            )));
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeAdmin()));
-      });
-    }
   }
 
   @override
@@ -261,32 +225,24 @@ class _AddItemState extends State<AddItem> {
               SizedBox(
                 height: 30.0,
               ),
-              GestureDetector(
-                onTap: () {
-                  uploadItem();
-
-                  // Navigator.pushReplacement(context,
-                  //     MaterialPageRoute(builder: (context) => HomeAdmin()));
-                },
-                child: Center(
-                  child: Material(
-                    elevation: 5.0,
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 5.0),
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Add",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+              Center(
+                child: Material(
+                  elevation: 5.0,
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Add",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
