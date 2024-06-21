@@ -1,6 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:valyrian_ventures/admin/admin_login.dart';
+=======
+import 'package:valyrian_ventures/pages/bottom_navbar.dart';
+>>>>>>> wallet2.1
 import 'package:valyrian_ventures/pages/login.dart';
 import 'package:valyrian_ventures/pages/profile.dart';
 import 'package:valyrian_ventures/pages/signup.dart';
@@ -19,8 +23,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+<<<<<<< HEAD
       debugShowCheckedModeBanner: false,
       home: AdminLogin(),
+=======
+        debugShowCheckedModeBanner: false,
+        home:Signup(),
+>>>>>>> wallet2.1
     );
   }
 }
