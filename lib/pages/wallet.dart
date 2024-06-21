@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../service/shared_pref.dart';
 import '../widget/widget_support.dart';
 
 class Wallet extends StatefulWidget {
@@ -10,9 +11,27 @@ class Wallet extends StatefulWidget {
 }
 
 class _WalletState extends State<Wallet> {
-  // String? wallet, id;
-  // int? add;
-  // TextEditingController amountcontroller = new TextEditingController();
+  String? wallet, id;
+  int? add;
+  TextEditingController amountcontroller = new TextEditingController();
+
+  getthesharedpref() async {
+    wallet = await SharedPreferenceHelper().getUserWallet();
+    id = await SharedPreferenceHelper().getUserId();
+    setState(() {});
+  }
+
+  ontheload() async {
+    await getthesharedpref();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    ontheload();
+    super.initState();
+  }
+
 
 
   @override
@@ -34,10 +53,12 @@ class _WalletState extends State<Wallet> {
                         )
                     )
                 )
-            ),
+            ),  //wallet text
             const SizedBox(
               height: 30.0,
             ),
+
+
             Container(
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               width: MediaQuery.of(context).size.width,
@@ -66,7 +87,7 @@ class _WalletState extends State<Wallet> {
                       ),
 
                       Text(
-                        "\$10000",
+                        "\$wallet",
                         style: AppWidget.boldTextFieldStyle(),
                       )//money remained in the wallet
                     ],
@@ -74,6 +95,8 @@ class _WalletState extends State<Wallet> {
                 ],
               ),
             ),
+
+
             const SizedBox(
               height: 30.0,
             ),

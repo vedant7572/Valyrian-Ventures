@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:valyrian_ventures/pages/login.dart';
 import 'package:valyrian_ventures/pages/profile.dart';
 import 'package:valyrian_ventures/pages/signup.dart';
+import 'package:valyrian_ventures/pages/wallet.dart';
 // import 'package:valyrian_ventures/pages/signup.dart';
 
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:LogIn(),
+        home:Wallet(),
     );
   }
 }
